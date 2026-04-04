@@ -2,7 +2,7 @@ import { CalloutPanel } from "@/components/site/callout-panel";
 import { Container } from "@/components/site/container";
 import { ExperienceCard } from "@/components/site/experience-card";
 import { SectionIntro } from "@/components/site/section-intro";
-import { experience } from "@/content/site";
+import { experience, supportingRepositories } from "@/content/site";
 
 export const metadata = {
   title: "Leadership",
@@ -51,10 +51,77 @@ export default function LeadershipPage() {
           >
             <p>
               The public FRC1884 surface already spans season robot code,
-              deterministic simulation work, scouting and vision tooling, and
-              other support systems. That range is part of the credibility.
+              PathPlanA autonomous tooling, deterministic simulation work,
+              scouting and strategy software, and operations support systems.
+              That range is part of the credibility.
             </p>
           </CalloutPanel>
+        </div>
+
+        <div className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
+          <div className="rounded-[2rem] border border-white/10 bg-white/[0.035] p-6 sm:p-8">
+            <p className="font-mono text-[0.7rem] uppercase tracking-[0.3em] text-cyan-200/72">
+              Toolchain context
+            </p>
+            <h2 className="mt-4 font-display text-3xl font-semibold tracking-[-0.05em] text-stone-50">
+              PathPlanner is part of the stack. PathPlanA is a distinct team repo.
+            </h2>
+            <div className="mt-5 space-y-4 text-sm leading-7 text-stone-300">
+              <p>
+                The preseason and 2025 robot-code READMEs explicitly credit
+                PathPlanner + PathPlannerLib, Choreo, and maple-sim in the 1884
+                software stack.
+              </p>
+              <p>
+                The 2026-era codebase also has a separate team planner repo:
+                PathPlanA. Its integration docs show a deploy-backed flow where
+                autos are authored in Flutter, exported into the Season2026
+                deploy tree, previewed on the operator board, and then executed
+                through the robot’s existing auto-align queue.
+              </p>
+              <p>
+                That is the accurate relationship: upstream PathPlanner is a
+                credited dependency in the team stack, while PathPlanA is
+                team-specific planning tooling that fits around that workflow.
+              </p>
+            </div>
+            <div className="mt-6 flex flex-wrap gap-2">
+              {experience[0].stack.map((item) => (
+                <span
+                  key={item}
+                  className="rounded-full border border-white/10 px-3 py-1 text-xs text-stone-200"
+                >
+                  {item}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <div className="rounded-[2rem] border border-white/10 bg-white/[0.035] p-6 sm:p-8">
+            <p className="font-mono text-[0.7rem] uppercase tracking-[0.3em] text-stone-500">
+              Supporting team repos
+            </p>
+            <div className="mt-4 space-y-4">
+              {supportingRepositories
+                .filter((repo) => repo.ownership === "team")
+                .map((repo) => (
+                  <a
+                    key={repo.name}
+                    href={repo.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="block rounded-[1.2rem] border border-white/10 p-4 transition hover:border-cyan-300/25 hover:bg-white/[0.03]"
+                  >
+                    <p className="font-display text-xl font-semibold tracking-[-0.04em] text-stone-50">
+                      {repo.name}
+                    </p>
+                    <p className="mt-2 text-sm leading-7 text-stone-300">
+                      {repo.summary}
+                    </p>
+                  </a>
+                ))}
+            </div>
+          </div>
         </div>
       </Container>
     </div>

@@ -85,3 +85,20 @@ Date: 2026-04-04
 - `npm run lint` passed.
 - `npm run typecheck` passed.
 - `npm run build` passed and prerendered the public routes.
+
+## GitHub Expansion Pass
+
+Date: 2026-04-04
+
+- Audited the existing project list against the personal GitHub account and the `FRC1884` org.
+- Added full project entries for `PathPlanA`, `frc1884-strategy`, `camera-ai`, `3D_DronePathPlanner`, and `aslrobotics-template`.
+- Added supporting repository coverage for `frc1884-scouting`, `attendance-appsscript`, `season2025`, and `Calendar`.
+- Strengthened the FRC1884 leadership surface to include planning, strategy, scouting, and operations tooling context.
+- Verified that PathPlanA exists as a distinct FRC1884 repo and represented PathPlanner accurately as an upstream credited dependency in the team stack, not as team authorship.
+
+## GitHub Expansion Follow-up
+
+Date: 2026-04-04
+
+- Added back the previously omitted repos `frc1884-scouting`, `Calendar`, `SiriMod`, and `PhysicsEngine` as full project entries.
+- Kept the copy intentionally conservative for the thinner public repos so the portfolio gained breadth without inventing maturity or hidden implementation details.

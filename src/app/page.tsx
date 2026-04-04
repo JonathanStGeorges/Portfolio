@@ -5,7 +5,13 @@ import { Container } from "@/components/site/container";
 import { ExperienceCard } from "@/components/site/experience-card";
 import { ProjectCard } from "@/components/site/project-card";
 import { SectionIntro } from "@/components/site/section-intro";
-import { experience, focusAreas, principles, siteConfig } from "@/content/site";
+import {
+  experience,
+  focusAreas,
+  principles,
+  siteConfig,
+  supportingRepositories,
+} from "@/content/site";
 import { getFeaturedProjects } from "@/lib/site";
 
 const featuredProjects = getFeaturedProjects();
@@ -151,6 +157,37 @@ export default function Home() {
           />
           <div className="mt-10">
             <ExperienceCard entry={experience[0]} />
+          </div>
+        </Container>
+      </section>
+
+      <section className="pt-18 sm:pt-24">
+        <Container>
+          <SectionIntro
+            eyebrow="GitHub footprint"
+            title="The public repo surface is broader than the featured case studies."
+            description="Beyond the main projects, there is a wider layer of strategy software, scouting systems, operations automation, and earlier season code that helps ground the portfolio in real ongoing work."
+          />
+          <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+            {supportingRepositories.map((repo) => (
+              <a
+                key={repo.name}
+                href={repo.href}
+                target="_blank"
+                rel="noreferrer"
+                className="rounded-[1.4rem] border border-white/10 bg-white/[0.03] p-5 transition hover:border-cyan-300/25 hover:bg-white/[0.05]"
+              >
+                <p className="font-mono text-[0.64rem] uppercase tracking-[0.26em] text-stone-500">
+                  {repo.category}
+                </p>
+                <h3 className="mt-4 font-display text-2xl font-semibold tracking-[-0.04em] text-stone-50">
+                  {repo.name}
+                </h3>
+                <p className="mt-3 text-sm leading-7 text-stone-300">
+                  {repo.summary}
+                </p>
+              </a>
+            ))}
           </div>
         </Container>
       </section>

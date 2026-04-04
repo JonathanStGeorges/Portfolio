@@ -9,6 +9,13 @@ type ProjectCardProps = {
 };
 
 export function ProjectCard({ project, priority = false }: ProjectCardProps) {
+  const ownershipLabel =
+    project.ownership === "team"
+      ? "Team repo"
+      : project.ownership === "research"
+        ? "Research"
+        : "Personal repo";
+
   return (
     <article className="project-card group flex h-full flex-col overflow-hidden rounded-[1.75rem] border border-white/10 bg-white/[0.035]">
       <div className="relative overflow-hidden border-b border-white/8">
@@ -45,16 +52,18 @@ export function ProjectCard({ project, priority = false }: ProjectCardProps) {
       <div className="flex flex-1 flex-col gap-5 p-6">
         <div className="space-y-3">
           <div className="flex flex-wrap gap-2">
-            <Badge tone={project.placeholder ? "muted" : "signal"}>
-              {project.category}
-            </Badge>
-            {project.placeholder ? <Badge tone="muted">Placeholder</Badge> : null}
+            <Badge tone="signal">{project.category}</Badge>
+            <Badge tone="muted">{ownershipLabel}</Badge>
+            <Badge tone="muted">{project.status}</Badge>
           </div>
           <div className="space-y-2">
             <h3 className="font-display text-2xl font-semibold tracking-[-0.04em] text-stone-50">
               {project.title}
             </h3>
             <p className="text-sm leading-7 text-stone-300">{project.summary}</p>
+            <p className="text-xs leading-6 text-stone-500">
+              {project.contributionContext}
+            </p>
           </div>
         </div>
 
@@ -78,12 +87,24 @@ export function ProjectCard({ project, priority = false }: ProjectCardProps) {
           <div className="text-xs uppercase tracking-[0.24em] text-stone-500">
             {project.stack.slice(0, 3).join(" / ")}
           </div>
-          <Link
-            href={`/projects/${project.slug}`}
-            className="rounded-full border border-white/10 px-4 py-2 text-sm text-stone-100 transition hover:border-cyan-300/30 hover:bg-cyan-400/10 hover:text-cyan-50"
-          >
-            View project
-          </Link>
+          <div className="flex items-center gap-3">
+            {project.repository ? (
+              <a
+                href={project.repository}
+                target="_blank"
+                rel="noreferrer"
+                className="text-xs uppercase tracking-[0.24em] text-cyan-100 transition hover:text-cyan-50"
+              >
+                Repo
+              </a>
+            ) : null}
+            <Link
+              href={`/projects/${project.slug}`}
+              className="rounded-full border border-white/10 px-4 py-2 text-sm text-stone-100 transition hover:border-cyan-300/30 hover:bg-cyan-400/10 hover:text-cyan-50"
+            >
+              View project
+            </Link>
+          </div>
         </div>
       </div>
     </article>

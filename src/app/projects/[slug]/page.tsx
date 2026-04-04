@@ -53,7 +53,14 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
           </Link>
           <div className="flex flex-wrap gap-3">
             <Badge tone="signal">{project.category}</Badge>
-            {project.placeholder ? <Badge tone="muted">Placeholder</Badge> : null}
+            <Badge tone="muted">
+              {project.ownership === "team"
+                ? "Team repo"
+                : project.ownership === "research"
+                  ? "Research"
+                  : "Personal repo"}
+            </Badge>
+            <Badge tone="muted">{project.status}</Badge>
           </div>
           <div className="space-y-4">
             <h1 className="max-w-5xl font-display text-4xl font-semibold tracking-[-0.06em] text-stone-50 sm:text-5xl lg:text-6xl">
@@ -125,6 +132,15 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
           <div className="space-y-4">
             <div className="rounded-[1.6rem] border border-white/10 bg-white/[0.03] p-6">
               <p className="font-mono text-[0.68rem] uppercase tracking-[0.3em] text-stone-500">
+                Contribution context
+              </p>
+              <p className="mt-4 text-sm leading-7 text-stone-300">
+                {project.contributionContext}
+              </p>
+            </div>
+
+            <div className="rounded-[1.6rem] border border-white/10 bg-white/[0.03] p-6">
+              <p className="font-mono text-[0.68rem] uppercase tracking-[0.3em] text-stone-500">
                 Roles
               </p>
               <ul className="mt-4 space-y-3 text-sm leading-7 text-stone-300">
@@ -171,6 +187,26 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
 
             <div className="rounded-[1.6rem] border border-white/10 bg-white/[0.03] p-6">
               <p className="font-mono text-[0.68rem] uppercase tracking-[0.3em] text-stone-500">
+                Repository
+              </p>
+              <div className="mt-4 space-y-3 text-sm leading-7">
+                {project.repository ? (
+                  <a
+                    href={project.repository}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-cyan-100 transition hover:text-cyan-50"
+                  >
+                    {project.repository}
+                  </a>
+                ) : (
+                  <p className="text-stone-400">No public repo linked here yet.</p>
+                )}
+              </div>
+            </div>
+
+            <div className="rounded-[1.6rem] border border-white/10 bg-white/[0.03] p-6">
+              <p className="font-mono text-[0.68rem] uppercase tracking-[0.3em] text-stone-500">
                 Artifacts
               </p>
               <div className="mt-4 space-y-3">
@@ -201,6 +237,15 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
                   ),
                 )}
               </div>
+            </div>
+
+            <div className="rounded-[1.6rem] border border-white/10 bg-white/[0.03] p-6">
+              <p className="font-mono text-[0.68rem] uppercase tracking-[0.3em] text-stone-500">
+                Evidence note
+              </p>
+              <p className="mt-4 text-sm leading-7 text-stone-300">
+                {project.sourceNote}
+              </p>
             </div>
           </div>
         </div>
