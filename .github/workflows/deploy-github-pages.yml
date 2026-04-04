@@ -1,0 +1,42 @@
+name: Deploy GitHub Pages
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build static site for GitHub Pages
+        env:
+          GITHUB_PAGES: "true"
+          GITHUB_PAGES_REPOSITORY: "Portfolio"
+          GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
+          SITE_URL: https://${{ github.repository_owner }}.github.io/Portfolio
+        run: npm run build
+
+      - name: Deploy out to gh-pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./out
+          publish_branch: gh-pages
