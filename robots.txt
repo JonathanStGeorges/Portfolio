@@ -1,4 +1,4 @@
 User-Agent: *
 Allow: /
 
-Sitemap: https://EXIBIST32132.github.io/Portfolio/sitemap.xml
+Sitemap: https://JonathanStGeorges.github.io/Portfolio/sitemap.xml
